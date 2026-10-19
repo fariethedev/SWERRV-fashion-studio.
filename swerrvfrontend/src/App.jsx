@@ -12,6 +12,7 @@ const LOOKS = [
 ];
 
 const CATEGORIES = ['All', 'Editorial', 'Streetwear', 'Studio'];
+const MOCK_API_URL = import.meta.env.VITE_MOCK_API_URL?.replace(/\/$/, '');
 const SORT_OPTIONS = [
   { value: 'featured', label: 'Featured order' },
   { value: 'newest', label: 'Newest first' },
@@ -55,10 +56,34 @@ function Lookbook() {
   const [category, setCategory] = useState(initialCategory);
   const [sort, setSort] = useState(initialSort);
   const [query, setQuery] = useState(searchParams.get('q') || '');
+  const [looks, setLooks] = useState(LOOKS);
+  const [apiState, setApiState] = useState(MOCK_API_URL ? 'loading' : 'local');
   const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
+    if (!MOCK_API_URL) return undefined;
+    const controller = new AbortController();
+
+    fetch(`${MOCK_API_URL}/api/looks`, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error('Mock API request failed');
+        return response.json();
+      })
+      .then((payload) => {
+        if (!Array.isArray(payload.data)) throw new Error('Mock API returned invalid catalogue data');
+        setLooks(payload.data);
+        setApiState('connected');
+      })
+      .catch((error) => {
+        if (error.name !== 'AbortError') setApiState('fallback');
+      });
+
+    return () => controller.abort();
+  }, []);
+
   const visibleLooks = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
-    const filtered = LOOKS.filter((look) => {
+    const filtered = looks.filter((look) => {
       const matchesCategory = category === 'All' || look.category === category;
       const searchableText = [look.title, look.category, look.mood, look.medium, ...look.tags].join(' ').toLowerCase();
       return matchesCategory && (!normalizedQuery || searchableText.includes(normalizedQuery));
@@ -69,7 +94,7 @@ function Lookbook() {
       if (sort === 'alphabetical') return first.title.localeCompare(second.title);
       return first.number - second.number;
     });
-  }, [category, query, sort]);
+  }, [category, looks, query, sort]);
 
   useEffect(() => {
     const nextParams = {};
@@ -108,7 +133,7 @@ function Lookbook() {
         <label className="sort-field"><span>Arrange by</span><select value={sort} onChange={(event) => setSort(event.target.value)}>{SORT_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label>
       </div>
     </div>
-    <div className="catalogue-status"><span>{visibleLooks.length} of {LOOKS.length} studies shown</span>{(category !== 'All' || sort !== 'featured' || query) && <button type="button" onClick={clearFilters}>Clear view ×</button>}</div>
+    <div className="catalogue-status"><span>{visibleLooks.length} of {looks.length} studies shown · {apiState === 'connected' ? 'Mock API' : apiState === 'fallback' ? 'Static fallback' : 'Local catalogue'}</span>{(category !== 'All' || sort !== 'featured' || query) && <button type="button" onClick={clearFilters}>Clear view ×</button>}</div>
     {visibleLooks.length ? <div className="look-grid">{visibleLooks.map((look) => <button className="look-card" type="button" key={look.id} onClick={() => setSelected(look)}><span className="look-image"><img src={look.image} alt="" /></span><span className="look-card-info"><span><strong>{look.title}</strong><small>{look.mood} / {look.year}</small></span><span>{look.category}</span></span></button>)}</div> : <div className="empty-state"><p className="eyebrow">No matching study</p><p>Try another word or return to the full archive.</p><button type="button" onClick={clearFilters}>Reset filters</button></div>}
     {selected && <div className="look-modal-backdrop" role="presentation" onClick={() => setSelected(null)}><div className="look-modal" role="dialog" aria-modal="true" aria-labelledby="look-title" onClick={(event) => event.stopPropagation()}><button className="modal-close" type="button" aria-label="Close preview" onClick={() => setSelected(null)}>×</button><img src={selected.image} alt={`${selected.title} editorial study`} /><div className="look-details"><p className="eyebrow">{selected.category} / {selected.year}</p><h2 id="look-title">{selected.title}</h2><p>{selected.description}</p><dl className="detail-grid"><div><dt>Format</dt><dd>{selected.medium}</dd></div><div><dt>Atmosphere</dt><dd>{selected.mood}</dd></div></dl><div className="tag-list" aria-label="Study tags">{selected.tags.map((tag) => <span key={tag}>#{tag}</span>)}</div><div className="palette" aria-label="Study colour palette">{selected.palette.map((colour) => <span key={colour} style={{ backgroundColor: colour }} title={colour} />)}</div></div></div></div>}
   </section>;
