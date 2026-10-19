@@ -1,117 +1,65 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import { Toaster } from 'react-hot-toast';
-import { HelmetProvider } from 'react-helmet-async';
-import { CartProvider } from './context/CartContext';
-import { WishlistProvider } from './context/WishlistContext';
-import { AuthProvider, useAuth } from './context/AuthContext';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import PageLoader from './components/PageLoader';
-import CookieBanner from './components/CookieBanner';
-import Home from './pages/Home';
-import Shop from './pages/Shop';
-import ProductDetail from './pages/ProductDetail';
-import Archive from './pages/Archive';
-import Checkout from './pages/Checkout';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import OrderSuccess from './pages/OrderSuccess';
-import Wishlist from './pages/Wishlist';
-import Admin from './pages/Admin';
-import Login from './pages/Login';
-import Profile from './pages/Profile';
-import Orders from './pages/Orders';
-import ForgotPassword from './pages/ForgotPassword';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsConditions from './pages/TermsConditions';
-import CookiePolicy from './pages/CookiePolicy';
-import { Navigate } from 'react-router-dom'; const Layout = ({ children }) => {
+import { useMemo, useState } from 'react';
+import { BrowserRouter, Link, Route, Routes, useLocation } from 'react-router-dom';
+import './EditorialApp.css';
+
+const LOOKS = [
+  { id: 'look-01', title: 'Concrete / 01', category: 'Editorial', image: '/images/hero_red_model.png', description: 'A study in contrast, movement, and saturated red.' },
+  { id: 'look-02', title: 'After Hours / 02', category: 'Streetwear', image: '/images/_DSC7962 (1).jpg', description: 'Layered silhouettes photographed after dark.' },
+  { id: 'look-03', title: 'Quiet Form / 03', category: 'Studio', image: '/images/_DSC7953.jpg', description: 'Soft light and a restrained monochrome palette.' },
+  { id: 'look-04', title: 'Signal / 04', category: 'Streetwear', image: '/images/_DSC7934.jpg', description: 'Graphic shapes built for the city.' },
+  { id: 'look-05', title: 'Material Study / 05', category: 'Studio', image: '/images/_DSC7916.jpg', description: 'Texture, fit, and fabric as the subject.' },
+  { id: 'look-06', title: 'Open Space / 06', category: 'Editorial', image: '/images/_DSC7893.jpg', description: 'A considered look at volume and motion.' },
+];
+
+const CATEGORIES = ['All', 'Editorial', 'Streetwear', 'Studio'];
+
+function Shell({ children }) {
   const location = useLocation();
-  const hideLayout = ['/checkout', '/admin', '/order-success', '/login', '/forgot-password'].includes(location.pathname);
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <>
-      {!hideLayout && <Navbar />}
+    <div className="editorial-app">
+      <header className="editorial-header">
+        <Link className="wordmark" to="/" onClick={() => setMenuOpen(false)}>SWERRV<span>®</span></Link>
+        <button className="menu-button" type="button" aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? 'Close' : 'Menu'}</button>
+        <nav className={`editorial-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Main navigation">
+          <Link className={location.pathname === '/' ? 'active' : ''} to="/" onClick={() => setMenuOpen(false)}>Index</Link>
+          <Link className={location.pathname === '/lookbook' ? 'active' : ''} to="/lookbook" onClick={() => setMenuOpen(false)}>Lookbook</Link>
+          <Link className={location.pathname === '/about' ? 'active' : ''} to="/about" onClick={() => setMenuOpen(false)}>About</Link>
+        </nav>
+        <span className="header-note">Independent fashion study / 2026</span>
+      </header>
       <main>{children}</main>
-      {!hideLayout && <Footer />}
-      <CookieBanner />
-    </>
+      <footer className="editorial-footer"><span>SWERRV / Visual archive</span><span>Read-only catalogue · no accounts · no checkout</span></footer>
+    </div>
   );
-};
+}
 
-const ProtectedAdminRoute = ({ children }) => {
-  const { user, loading } = useAuth();
-  if (loading) return <PageLoader />;
-  if (!user || user.role !== 'ADMIN') return <Navigate to="/login" replace />;
-  return children;
-};
+function Index() {
+  return <section className="index-page">
+    <div className="index-copy"><p className="eyebrow">Independent visual catalogue</p><h1>Clothing as a<br /><em>moving image.</em></h1><p className="lede">SWERRV is a small editorial project exploring silhouettes, texture, and the relationship between clothing and place.</p><Link className="text-link" to="/lookbook">Enter the lookbook <span>↗</span></Link></div>
+    <div className="index-hero"><img src="/images/hero_red_model.png" alt="Editorial fashion portrait in a red outfit" /><span className="image-label">Figure 01 / Red study</span></div>
+    <div className="index-meta"><span>01—06</span><span>Made for the screen</span><span>Scroll to explore ↓</span></div>
+  </section>;
+}
 
-const AppContent = () => {
-  const location = useLocation();
-  const { loading } = useAuth();
+function Lookbook() {
+  const [category, setCategory] = useState('All');
+  const [selected, setSelected] = useState(null);
+  const visibleLooks = useMemo(() => category === 'All' ? LOOKS : LOOKS.filter((look) => look.category === category), [category]);
 
-  if (loading) return <PageLoader />;
+  return <section className="lookbook-page page-wrap">
+    <div className="page-intro"><p className="eyebrow">A fictional sample catalogue</p><h1>Lookbook<span>.</span></h1><p>Browse a set of made-up editorial studies. This catalogue is intentionally read-only: it has no user accounts, checkout, messaging, forms, or external data services.</p></div>
+    <div className="filter-row" aria-label="Lookbook filters">{CATEGORIES.map((item) => <button key={item} type="button" className={category === item ? 'selected' : ''} onClick={() => setCategory(item)}>{item}</button>)}</div>
+    <div className="look-grid">{visibleLooks.map((look) => <button className="look-card" type="button" key={look.id} onClick={() => setSelected(look)}><span className="look-image"><img src={look.image} alt="" /></span><span className="look-card-info"><span>{look.title}</span><span>{look.category}</span></span></button>)}</div>
+    {selected && <div className="look-modal-backdrop" role="presentation" onClick={() => setSelected(null)}><div className="look-modal" role="dialog" aria-modal="true" aria-labelledby="look-title" onClick={(event) => event.stopPropagation()}><button className="modal-close" type="button" aria-label="Close preview" onClick={() => setSelected(null)}>×</button><img src={selected.image} alt="" /><div><p className="eyebrow">{selected.category}</p><h2 id="look-title">{selected.title}</h2><p>{selected.description}</p></div></div></div>}
+  </section>;
+}
 
-  return (
-    <AnimatePresence mode="wait">
-      <Layout key={location.pathname}>
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/archive" element={<Archive />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/order-success" element={<OrderSuccess />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/terms" element={<TermsConditions />} />
-          <Route path="/cookie-policy" element={<CookiePolicy />} />
-          <Route path="/admin" element={
-            <ProtectedAdminRoute>
-              <Admin />
-            </ProtectedAdminRoute>
-          } />
-          <Route path="*" element={
-            <div className="min-h-screen flex flex-col items-center justify-center gap-6">
-              <h1 className="text-8xl font-black text-accent">404</h1>
-              <p className="text-xl text-grey-300">Page not found</p>
-              <a href="/" className="btn-primary">Back to Home</a>
-            </div>
-          } />
-        </Routes>
-      </Layout>
-    </AnimatePresence>
-  );
-};
+function About() {
+  return <section className="about-page page-wrap"><div className="page-intro"><p className="eyebrow">About the project</p><h1>Human scale<span>.</span></h1></div><div className="about-grid"><p className="about-lead">SWERRV began as a clothing-commerce build and has been deliberately re-scoped into a static visual catalogue for this public review version.</p><div className="about-body"><p>The current app is a frontend-only study: visitors can browse fictional catalogue entries, filter the lookbook, and preview images in memory. Nothing is submitted, persisted, authenticated, purchased, or sent to a third party.</p><p>The project is designed to be easy to inspect and run locally. Its earlier commerce experiments remain visible in Git history as development context; the active branch intentionally removes those workflows from the running experience.</p></div></div><div className="scope-panel"><span>Current scope</span><strong>Read-only visual catalogue</strong><span>No personal data · no payments · no persistence</span></div></section>;
+}
 
-import { CurrencyProvider } from './context/CurrencyContext';
-import { LanguageProvider } from './context/LanguageContext';
+function NotFound() { return <section className="not-found page-wrap"><p className="eyebrow">404</p><h1>Nothing here<span>.</span></h1><Link className="text-link" to="/">Return to index <span>↗</span></Link></section>; }
 
-const App = () => (
-  <HelmetProvider>
-    <BrowserRouter>
-      <LanguageProvider>
-        <CurrencyProvider>
-          <AuthProvider>
-            <CartProvider>
-              <WishlistProvider>
-                <AppContent />
-                <Toaster position="bottom-right" toastOptions={{
-                  style: { background: '#111', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' }
-                }} />
-              </WishlistProvider>
-            </CartProvider>
-          </AuthProvider>
-        </CurrencyProvider>
-      </LanguageProvider>
-    </BrowserRouter>
-  </HelmetProvider>
-);
-
-export default App;
+export default function App() { return <BrowserRouter><Shell><Routes><Route path="/" element={<Index />} /><Route path="/lookbook" element={<Lookbook />} /><Route path="/about" element={<About />} /><Route path="*" element={<NotFound />} /></Routes></Shell></BrowserRouter>; }
