@@ -1,6 +1,6 @@
 # SWERRV Visual Catalogue
 
-SWERRV is a read-only fashion lookbook and visual catalogue. It presents fictional editorial studies focused on silhouette, texture, colour, and composition. Visitors can browse the index, filter the lookbook, and open an in-memory image preview.
+SWERRV is a read-only fashion lookbook and visual catalogue. It presents fictional editorial studies focused on silhouette, texture, colour, and composition. Visitors can browse the index, search and filter the lookbook, sort the archive, and open an in-memory image preview with study metadata.
 
 This repository is personally owned and is the rescope of an earlier SWERRV clothing-commerce implementation. The active version is intentionally a frontend-only catalogue: it does not create accounts, collect contact details, accept payments, submit forms, send messages, use cookies for profiles, call a backend, or persist visitor data. The earlier implementation remains visible in Git history as development context; it is not part of the active running scope.
 

@@ -5,14 +5,14 @@ This roadmap represents more than 20 hours of planned development for the read-o
 ## Foundation and interaction — 6 hours
 
 - [ ] Add keyboard-first navigation and visible focus states (2h)
-- [ ] Add accessible modal focus management and Escape-to-close behaviour (2h)
+- [x] Add accessible modal focus management and Escape-to-close behaviour (2h) — Escape-to-close is implemented; focus trapping remains planned.
 - [ ] Add loading, missing-image, and reduced-motion states (2h)
 
 ## Editorial catalogue — 7 hours
 
 - [ ] Create a typed/content-driven catalogue schema for future entries (2h)
 - [ ] Add image metadata, captions, and responsive art direction (2h)
-- [ ] Build a sortable archive view with stable URL filters (3h)
+- [x] Build a sortable archive view with stable URL filters (3h)
 
 ## Visual system — 6 hours
 
