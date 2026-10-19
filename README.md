@@ -39,4 +39,4 @@ The build and lint commands only cover the active catalogue entry points. No env
 
 All catalogue descriptions are fictional sample content. The app has no forms or write operations and stores only temporary UI state in the browser while a visitor is viewing a lookbook preview. Do not add real customer, subscriber, buyer, or user data to this repository.
 
-See [SCOPE.md](SCOPE.md) for the explicit boundary of the active project and [ROADMAP.md](ROADMAP.md) for the planned development work.
+See [SCOPE.md](SCOPE.md) for the explicit boundary of the active project, [ROADMAP.md](ROADMAP.md) for the planned development work, and [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md) for the repository-readiness checklist.
