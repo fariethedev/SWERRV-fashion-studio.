@@ -31,7 +31,14 @@ function filterLooks(url) {
 }
 
 const server = createServer((request, response) => {
-  const url = new URL(request.url || '/', `http://${request.headers.host || 'localhost'}`);
+  let url;
+  try {
+    url = new URL(request.url || '/', 'http://localhost');
+    decodeURIComponent(url.pathname);
+  } catch {
+    sendJson(response, 400, { error: 'Invalid request URL' });
+    return;
+  }
 
   if (request.method === 'OPTIONS') {
     response.writeHead(204, {

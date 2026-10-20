@@ -11,6 +11,8 @@ npm run dev
 
 The API listens on `http://localhost:8787` by default. Set `PORT` to use another local port.
 
+Open the visual application at `http://localhost:5173/lookbook` after starting the frontend in a second terminal. Opening an API endpoint directly displays JSON, which is the data format consumed by the app. The frontend now requests this API by default through its development proxy, including search, category, and sort parameters. The garment studio edits designs locally; these routes serve the catalogue only.
+
 ## Read-only routes
 
 - `GET /health`

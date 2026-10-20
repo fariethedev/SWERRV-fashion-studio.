@@ -49,7 +49,9 @@ cd mock-api
 npm run dev
 ```
 
-Copy `swerrvfrontend/.env.example` to `swerrvfrontend/.env` and restart Vite if you want the frontend to read from `http://localhost:8787`; if the API is unavailable, it falls back to the bundled fictional catalogue.
+During development, the lookbook requests `/api/looks` through Vite, which forwards to the Node API on port 8787. Search, category, and sorting changes issue new API requests. Run both servers; no environment file is needed. If the API is unavailable, the catalogue uses bundled records and labels the result as a static fallback. The garment studio is a browser-based editor and does not depend on this catalogue API.
+
+For production hosting, route `/api` to the Node service or set `VITE_MOCK_API_URL` before building. Vite's development proxy is not included in a static deployment.
 
 The build and lint commands cover the active catalogue entry points.
 
