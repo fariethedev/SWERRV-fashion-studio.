@@ -9,7 +9,8 @@ This checklist records the repository requirements that can be verified before s
 - [x] **Root README:** the README explains the purpose, audience, technology, local setup, data boundary, and the fact that this is the read-only rescope of the earlier production implementation.
 - [x] **Root license:** the repository contains an MIT license in `LICENSE`.
 - [x] **Real history:** the existing development sequence and commit messages were retained. History was rewritten only to remove exposed credentials; commits were not squashed or replaced with a new project history.
-- [ ] **Secrets and credential rotation:** known credentials were redacted from history. Confirm revocation/rotation of Stripe, Google OAuth, database, JWT, and Resend credentials, and complete a scan of all submitted refs. GitHub push protection is not a complete audit.
+- [x] **Credential revocation — owner confirmed:** Farai reports rotating the credentials and confirms that all previously exposed credentials have been revoked, covering Stripe, Google OAuth, database passwords, JWT signing secrets, and Resend. This records the owner's confirmation; provider-side revocation was not independently verified by the coding assistant.
+- [x] **Known-secret history cleanup and follow-up scan:** known credentials were redacted from history. The follow-up pattern scan covered the then-published `main` history (77 commits and 471 text file versions) and identified no additional secrets. This is a bounded scan result, not a guarantee that every possible secret is absent; GitHub push protection is not a complete audit.
 - [ ] **Personal data and asset permissions:** descriptions are fictional, but photographs, metadata, and historical files still require review. Record publication rights and any identifiable people in `ASSET_REVIEW.md`.
 - [ ] **Intended scope and deployment:** disclose the local garment studio, text editing, SVG export, and existing catalogue to reviewers; review hosting logs and external requests, and obtain the program's scope decision. Mock data alone does not establish eligibility.
 - [ ] **Commit attribution:** confirm the commit email is linked to the owner's GitHub account.
@@ -22,4 +23,4 @@ This checklist records the repository requirements that can be verified before s
 
 ## Security follow-up
 
-Any credentials that were ever exposed in the old history must still be revoked or rotated with their providers. Redacting Git history does not invalidate a credential. The pre-redaction history backup is local-only and must not be submitted or shared.
+The owner has confirmed revocation of all previously exposed credentials. No credential values or private provider records are recorded here. The pre-redaction history backup still contains the original values and must not be submitted or shared. Any newly discovered exposed credentials require separate revocation and cleanup.
