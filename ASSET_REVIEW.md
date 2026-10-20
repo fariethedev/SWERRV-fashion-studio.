@@ -4,9 +4,43 @@
 
 Farai states: “I personally took the photographs for my clothing brand.”
 
+Farai confirms that the SWERRV brand logo is his personal logo and that the fonts came from Google Fonts. The historical font imports identify Poppins, Space Grotesk, and Dancing Script. This brand-logo confirmation concerns the SWERRV logo assets; the historical Vite development icon is listed separately below.
+
 Farai also confirms ownership of the SWERRV product images, logos, video, and other original brand assets, and states that `hero_red_model.png` was generated using ChatGPT. Farai confirms permission from the identifiable people in the photographs for publication and program-session sharing.
 
 These are owner attestations recorded from the conversation, not independently verified permission documents or a determination of copyright in AI-generated output. No private releases or generation records are published here. Picsart provenance and relevant historical third-party assets remain unresolved.
+
+## Reconciliation of the completion statement
+
+The completion statement in the email described to Kahveh is broader than the evidence recorded at commit `53ccbd46524621f3cf735e6f7810f692efd9e2ce`. The overall asset-permission check remains open. The existing owner confirmations cover personal photography, original brand assets, and permission from identifiable people for publication and program-session sharing; they do not resolve the specific Picsart provenance or historical third-party checks below.
+
+Existing non-private references:
+
+- Commit `0d57cfd` records Farai's personal-photography statement.
+- Commit `53ccbd46524621f3cf735e6f7810f692efd9e2ce` records the original-brand-asset ownership and identifiable-person permission confirmations, and identifies ChatGPT as the reported generation source for `hero_red_model.png`. These are owner attestations, not underlying permission documents.
+- Git history records all five Picsart files as added in initial commit `b541c0a`. This identifies their repository introduction only; it does not establish the creator, original photograph, editor, added elements, or permission. The earlier statement attributing their addition to the assistant is not evidence of their creation or rights.
+
+Still unresolved:
+
+- Each of the five Picsart files listed below needs an explicit account of the original photograph and editor, whether any third-party elements were added, and the applicable existing source/license or non-private permission reference. No such file-specific account or reference has been supplied in the reviewed documentation.
+- Relevant historical third-party assets and earlier versions still need an item-by-item source, permission, and notice review. The removed `swerrvfrontend/public/vite.svg` is a known example; its presence in the initial commit and later removal do not close the historical review. This is not a complete historical asset inventory.
+
+To close an item, record the asset/path and relevant version, its creator or original source, any added elements, the permission basis and permitted use, a non-private reference (and date where available), and any required attribution or notices. An explicit owner confirmation that an image contains only their own photograph and original edits can be recorded as an attestation where applicable; do not infer it from general brand ownership or the filename.
+
+Preserve authentic commits and existing notices. Any correction belongs in a new change; do not rewrite history or remove an unresolved status merely to match the email. Private evidence and the pre-redaction backup must remain outside this document.
+
+## Specific historical third-party references found
+
+The phrase "historical third-party assets" refers to identifiable earlier repository content, not a finding that the owner's photographs or brand assets belong to somebody else:
+
+| Item | Existing repository evidence | Current status |
+| --- | --- | --- |
+| Vite logo, `swerrvfrontend/public/vite.svg` | Present at initial commit `b541c0a`; removed in `435aaae`. | Concrete historical third-party artwork. Its upstream source/license and any applicable notices have not yet been recorded here. Removal from the current tree does not document the earlier permission basis. |
+| Google Fonts stylesheet imports: Poppins, Space Grotesk, and Dancing Script | The import appears in `swerrvfrontend/src/index.css` at `b541c0a`. `1b197dc` removes that import and the Poppins stylesheet link/preconnects in `swerrvfrontend/index.html`. | Source: Google Fonts, confirmed by Farai and the historical stylesheet imports. Current code uses local fallbacks. Specific font license references have not yet been recorded here. |
+
+A scan of asset paths in the locally available Git history found no standalone font binaries or `.mp3`, `.wav`, or `.ogg` files under `swerrvfrontend`. This does not establish whether the existing video contains third-party audio or whether images contain added elements. No specific additional third-party music or graphics have been established by this check; those possibilities must not be presented as confirmed findings.
+
+Farai reiterates that GPT added the five Picsart files. Their original session/source records are not available in the reviewed repository documentation. A bounded check of the five current files found no embedded HTTP/HTTPS source URLs; it did not establish their original creators or permission basis. Record the GPT addition as owner-reported provenance, without treating it as proof that GPT generated the images or owned their underlying contents.
 
 ## Asset inventory and references
 
@@ -14,11 +48,11 @@ The links below locate the files in the repository at commit `3f24428054da1c73c4
 
 | File / repository reference | Source and attribution status |
 | --- | --- |
-| [Picsart_25-10-04_01-46-52-793.jpg](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/Picsart_25-10-04_01-46-52-793.jpg) | Edited image; original photograph and any added elements/source URLs need confirmation. |
-| [Picsart_25-10-04_02-05-07-612.jpg](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/Picsart_25-10-04_02-05-07-612.jpg) | Edited image; original photograph and any added elements/source URLs need confirmation. |
-| [Picsart_25-10-04_02-08-48-756.png](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/Picsart_25-10-04_02-08-48-756.png) | Edited image; original photograph and any added elements/source URLs need confirmation. |
-| [Picsart_25-10-04_02-10-03-947.jpg](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/Picsart_25-10-04_02-10-03-947.jpg) | Edited image; original photograph and any added elements/source URLs need confirmation. |
-| [Picsart_25-10-04_02-17-52-199.jpg](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/Picsart_25-10-04_02-17-52-199.jpg) | Edited image; original photograph and any added elements/source URLs need confirmation. |
+| [Picsart_25-10-04_01-46-52-793.jpg](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/Picsart_25-10-04_01-46-52-793.jpg) | Farai reports that GPT added this file. Original photograph/generation source and any added elements remain unconfirmed; no source URL supplied. |
+| [Picsart_25-10-04_02-05-07-612.jpg](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/Picsart_25-10-04_02-05-07-612.jpg) | Farai reports that GPT added this file. Original photograph/generation source and any added elements remain unconfirmed; no source URL supplied. |
+| [Picsart_25-10-04_02-08-48-756.png](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/Picsart_25-10-04_02-08-48-756.png) | Farai reports that GPT added this file. Original photograph/generation source and any added elements remain unconfirmed; no source URL supplied. |
+| [Picsart_25-10-04_02-10-03-947.jpg](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/Picsart_25-10-04_02-10-03-947.jpg) | Farai reports that GPT added this file. Original photograph/generation source and any added elements remain unconfirmed; no source URL supplied. |
+| [Picsart_25-10-04_02-17-52-199.jpg](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/Picsart_25-10-04_02-17-52-199.jpg) | Farai reports that GPT added this file. Original photograph/generation source and any added elements remain unconfirmed; no source URL supplied. |
 | [_DSC7874 (1).jpg](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/_DSC7874%20(1).jpg) | Owner reports personal photography and ownership; permission from identifiable people for publication and session sharing is owner-confirmed. |
 | [_DSC7874.jpg](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/_DSC7874.jpg) | Owner reports personal photography and ownership; permission from identifiable people for publication and session sharing is owner-confirmed. |
 | [_DSC7876.jpg](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/_DSC7876.jpg) | Owner reports personal photography and ownership; permission from identifiable people for publication and session sharing is owner-confirmed. |
@@ -104,7 +138,7 @@ The links below locate the files in the repository at commit `3f24428054da1c73c4
 | [_DSC8470.jpg](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/_DSC8470.jpg) | Owner reports personal photography and ownership; permission from identifiable people for publication and session sharing is owner-confirmed. |
 | [_DSC8473.jpg](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/_DSC8473.jpg) | Owner reports personal photography and ownership; permission from identifiable people for publication and session sharing is owner-confirmed. |
 | [hero_red_model.png](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/hero_red_model.png) | Owner identifies ChatGPT as the generation source. No public generation reference supplied; no independent rights determination. |
-| [logo.jpeg](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/logo.jpeg) | Ownership confirmed by Farai for original brand assets. No external source URL supplied; statement recorded without independently inspecting underlying rights records. |
+| [logo.jpeg](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/logo.jpeg) | Farai confirms this is his personal SWERRV brand logo. Source: owner-provided brand asset; ownership recorded from his confirmation. |
 | [logovideo.mov](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/logovideo.mov) | Ownership confirmed by Farai for original brand assets. No external source URL supplied; statement recorded without independently inspecting underlying rights records. |
 | [swerrv_bag_model_1772058939685.png](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/swerrv_bag_model_1772058939685.png) | Ownership confirmed by Farai for original brand assets. No external source URL supplied; statement recorded without independently inspecting underlying rights records. |
 | [swerrv_cap_1772060869187.png](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/swerrv_cap_1772060869187.png) | Ownership confirmed by Farai for original brand assets. No external source URL supplied; statement recorded without independently inspecting underlying rights records. |
@@ -114,7 +148,7 @@ The links below locate the files in the repository at commit `3f24428054da1c73c4
 | [swerrv_jacket_1772060954722.png](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/swerrv_jacket_1772060954722.png) | Ownership confirmed by Farai for original brand assets. No external source URL supplied; statement recorded without independently inspecting underlying rights records. |
 | [swerrv_tracksuit_model_1772058864079.png](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/swerrv_tracksuit_model_1772058864079.png) | Ownership confirmed by Farai for original brand assets. No external source URL supplied; statement recorded without independently inspecting underlying rights records. |
 | [swerrv_tshirt_model_1772058780873.png](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/swerrv_tshirt_model_1772058780873.png) | Ownership confirmed by Farai for original brand assets. No external source URL supplied; statement recorded without independently inspecting underlying rights records. |
-| [swerrve_logo_white.png](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/swerrve_logo_white.png) | Ownership confirmed by Farai for original brand assets. No external source URL supplied; statement recorded without independently inspecting underlying rights records. |
+| [swerrve_logo_white.png](https://github.com/fariethedev/swerrv-clothingbrand-website/blob/3f24428054da1c73c435355c77aa77f064b4b5ed/swerrvfrontend/public/images/swerrve_logo_white.png) | Farai confirms this is his personal SWERRV brand logo. Source: owner-provided brand asset; ownership recorded from his confirmation. |
 
 ## Studio vector artwork
 
