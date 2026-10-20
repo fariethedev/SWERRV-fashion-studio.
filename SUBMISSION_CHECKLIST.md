@@ -11,9 +11,9 @@ This checklist records the repository requirements that can be verified before s
 - [x] **Real history:** the existing development sequence and commit messages were retained. History was rewritten only to remove exposed credentials; commits were not squashed or replaced with a new project history.
 - [ ] **Secrets and credential rotation:** known credentials were redacted from history. Confirm revocation/rotation of Stripe, Google OAuth, database, JWT, and Resend credentials, and complete a scan of all submitted refs. GitHub push protection is not a complete audit.
 - [ ] **Personal data and asset permissions:** descriptions are fictional, but photographs, metadata, and historical files still require review. Record publication rights and any identifiable people in `ASSET_REVIEW.md`.
-- [ ] **Intended scope and deployment:** confirm that the intended project remains a catalogue, review hosting logs and external requests, and obtain the program's scope decision. Mock data alone does not establish eligibility.
+- [ ] **Intended scope and deployment:** disclose the local garment studio, text editing, SVG export, and existing catalogue to reviewers; review hosting logs and external requests, and obtain the program's scope decision. Mock data alone does not establish eligibility.
 - [ ] **Commit attribution:** confirm the commit email is linked to the owner's GitHub account.
-- [x] **Planned work:** `ROADMAP.md` documents 56 hours across 20 future development days, with every item limited to the read-only catalogue and fictional-data mock API scope.
+- [x] **Planned work:** `ROADMAP.md` separates implemented studio features from 28 hours of remaining development for the local garment design tool.
 - [x] **Verification:** the active frontend passes `npm run build` and `npm run lint`.
 
 ## Final external confirmation

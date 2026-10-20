@@ -1,0 +1,24 @@
+.studio { max-width: 110rem; padding-inline: 4vw; }
+.studio-toolbar { display: flex; gap: .8rem; align-items: center; flex-wrap: wrap; margin: 2rem 0; }
+.studio button, .studio select, .studio input:not([type="range"]) { background: #242424; color: #f2f0ec; border: 1px solid #666; border-radius: 4px; padding: .65rem; font: inherit; }
+.studio button { cursor: pointer; }
+.studio button:disabled { opacity: .4; cursor: default; }
+.studio button[aria-pressed="true"] { border-color: #ff9579; background: #493128; }
+.studio :is(button, input, select):focus-visible { outline: 3px solid #ff9579; outline-offset: 3px; }
+.studio-layout { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(280px, 2fr) minmax(180px, 1fr); gap: 1.5rem; align-items: start; }
+.studio-panel { background: #191919; padding: 1.2rem; border: 1px solid #444; border-radius: 8px; min-width: 0; }
+.studio-panel h2 { font-size: .95rem; margin: 1.3rem 0 1rem; }
+.studio-panel h2:first-child { margin-top: 0; }
+.studio-panel label { display: grid; gap: .6rem; margin: 1rem 0; font-size: .85rem; }
+.studio-panel input, .studio-panel select { width: 100%; min-width: 0; }
+.studio-panel input[type="color"] { height: 3rem; }
+.studio-panel input[type="range"] { accent-color: #ff9579; }
+.studio-buttons { display: flex; flex-wrap: wrap; gap: .5rem; }
+.studio-panel p, .studio-preview p, .studio-toolbar span { color: #ccc; font-size: .8rem; line-height: 1.6; margin-block: 1rem; }
+.studio-preview { background: #e9e6df; border-radius: 8px; text-align: center; overflow: hidden; }
+.studio-preview svg { display: block; width: 100%; height: auto; max-height: 75vh; }
+.studio-preview p { color: #444; padding: .8rem; }
+.studio-layers { list-style: none; padding: 0; display: grid; gap: .5rem; }
+.studio-layers button { width: 100%; text-align: left; overflow-wrap: anywhere; }
+@media (max-width: 1000px) { .studio-layout { grid-template-columns: 1fr 2fr; } .studio-layout > :last-child { grid-column: 1 / -1; } }
+@media (max-width: 600px) { .studio-layout { display: flex; flex-direction: column; } .studio-layout > * { width: 100%; } .studio-preview { order: -1; } }

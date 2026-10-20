@@ -1,8 +1,11 @@
 # Active project scope
 
-The current branch is a public, read-only visual catalogue rather than a commerce application.
+The current branch contains a local garment design studio and a read-only visual catalogue. The studio supports local editing and explicit SVG downloads; the optional backend remains read-only. There are no commerce workflows.
 
 ## Included
+
+- In-memory garment editing with original vector templates, built-in graphics, text, colours, front/back layers, undo/redo, and SVG mockup export.
+- No server-side storage of designs; refreshing clears the studio.
 
 - A responsive React/Vite interface.
 - Fictional catalogue entries and local image assets.

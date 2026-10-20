@@ -1,4 +1,12 @@
-# SWERRV Visual Catalogue
+# SWERRV Garment Studio
+
+SWERRV includes a local garment design workspace at `/` and `/studio`. Choose a T-shirt, hoodie, or sweatshirt; change fabric colour; switch front/back; add text and built-in vector graphics; drag, resize, rotate, reorder, and delete layers; undo/redo; and export an SVG mockup. Templates and graphic primitives are authored in source code, with no image dependencies for the studio.
+
+Designs remain in memory and are lost on refresh. Export each side separately to retain a visual mockup. Artwork outside the dashed print area is clipped. Exports are illustrations, not dimensioned production print files. This version has no 3D rendering or uploaded-image editor.
+
+Run `npm run test:studio` inside `swerrvfrontend` for history and state tests. The [roadmap](ROADMAP.md) separates implemented features from **28 hours of remaining development**.
+
+## Existing catalogue
 
 SWERRV is a read-only fashion lookbook and visual catalogue. It presents fictional editorial studies focused on silhouette, texture, colour, and composition. Visitors can browse the index, search and filter the lookbook, sort the archive, and open an in-memory image preview with study metadata.
 

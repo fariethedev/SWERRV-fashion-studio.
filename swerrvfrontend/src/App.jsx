@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { BrowserRouter, Link, Route, Routes, useLocation, useSearchParams } from 'react-router-dom';
 import './EditorialApp.css';
+import GarmentStudio from './GarmentStudio';
 
 const LOOKS = [
   { id: 'look-01', number: 1, title: 'Concrete / 01', category: 'Editorial', year: '2026', image: '/images/hero_red_model.png', description: 'A study in contrast, movement, and saturated red.', medium: 'Portrait study', mood: 'Charged', tags: ['contrast', 'movement', 'red'], palette: ['#a84132', '#d6c4b4', '#161616'] },
@@ -35,15 +36,16 @@ function Shell({ children }) {
         <Link className="wordmark" to="/" onClick={() => setMenuOpen(false)}>SWERRV<span>®</span></Link>
         <button className="menu-button" type="button" aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? 'Close' : 'Menu'}</button>
         <nav className={`editorial-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Main navigation">
-          <Link className={location.pathname === '/' ? 'active' : ''} to="/" onClick={() => setMenuOpen(false)}>Index</Link>
+          <Link className={location.pathname === '/index' ? 'active' : ''} to="/index" onClick={() => setMenuOpen(false)}>Index</Link>
           <Link className={location.pathname === '/lookbook' ? 'active' : ''} to="/lookbook" onClick={() => setMenuOpen(false)}>Lookbook</Link>
           <Link className={location.pathname === '/about' ? 'active' : ''} to="/about" onClick={() => setMenuOpen(false)}>About</Link>
           <Link className={location.pathname === '/notes' ? 'active' : ''} to="/notes" onClick={() => setMenuOpen(false)}>Notes</Link>
+          <Link className={['/', '/studio'].includes(location.pathname) ? 'active' : ''} to="/" onClick={() => setMenuOpen(false)}>Studio</Link>
         </nav>
         <span className="header-note">Independent fashion study / 2026</span>
       </header>
       <main>{children}</main>
-      <footer className="editorial-footer"><span>SWERRV / Visual archive</span><span>Read-only catalogue · no accounts · no checkout</span></footer>
+      <footer className="editorial-footer"><span>SWERRV / Garment studio & archive</span><span>Local design tools · no accounts · no checkout</span></footer>
     </div>
   );
 }
@@ -161,4 +163,4 @@ function FieldNotes() {
 
 function NotFound() { return <section className="not-found page-wrap"><p className="eyebrow">404</p><h1>Nothing here<span>.</span></h1><Link className="text-link" to="/">Return to index <span>↗</span></Link></section>; }
 
-export default function App() { return <BrowserRouter><Shell><Routes><Route path="/" element={<Index />} /><Route path="/lookbook" element={<Lookbook />} /><Route path="/about" element={<About />} /><Route path="/notes" element={<FieldNotes />} /><Route path="*" element={<NotFound />} /></Routes></Shell></BrowserRouter>; }
+export default function App() { return <BrowserRouter><Shell><Routes><Route path="/" element={<GarmentStudio />} /><Route path="/index" element={<Index />} /><Route path="/studio" element={<GarmentStudio />} /><Route path="/lookbook" element={<Lookbook />} /><Route path="/about" element={<About />} /><Route path="/notes" element={<FieldNotes />} /><Route path="*" element={<NotFound />} /></Routes></Shell></BrowserRouter>; }

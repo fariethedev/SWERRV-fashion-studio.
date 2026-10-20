@@ -1,39 +1,35 @@
-# 20-day development plan
+# Garment Studio development plan
 
-This is the planned next 20 development days for SWERRV. Each day is a focused working session; estimates are working hours, not calendar promises. The plan adds depth to the read-only visual catalogue and its local fictional-data mock API without introducing accounts, personal-data processing, payments, messaging, or persistence.
+## Implemented baseline
 
-## Days 1–5 — Product foundation
+- [x] T-shirt, hoodie, and sweatshirt vector templates with fabric colours.
+- [x] Independent front/back artwork layers.
+- [x] Built-in text, circle, rectangle, star, and lightning graphics.
+- [x] Pointer dragging, position sliders, size, rotation, ink colour, and layer ordering.
+- [x] Undo/redo and layer deletion.
+- [x] SVG mockup export with editor guides removed.
 
-- [ ] **Day 1 — Scope and content model (3h):** document the catalogue schema, editorial vocabulary, and rules for fictional-only entries.
-- [ ] **Day 2 — API contract (3h):** define response shapes, query parameters, error responses, and read-only route expectations.
-- [ ] **Day 3 — Mock API hardening (3h):** add route validation, consistent headers, safe error handling, and a small health contract.
-- [ ] **Day 4 — Frontend data adapter (3h):** isolate API loading, static fallback, loading states, and source-status messaging.
-- [ ] **Day 5 — URL state and navigation (3h):** refine shareable filters, sorting, presentation mode, and route-level empty states.
+These features are implemented work, not future hours. The studio uses in-memory state: refreshing clears a design. Exports are illustrative, not production print specifications.
 
-## Days 6–10 — Catalogue experience
+## Next development phase — 28 hours
 
-- [ ] **Day 6 — Grid/list presentation (2h):** refine both catalogue layouts and preserve the chosen view across navigation.
-- [ ] **Day 7 — Keyboard navigation (3h):** add visible focus states, predictable tab order, and keyboard-first menu behavior.
-- [ ] **Day 8 — Modal accessibility (3h):** add focus return, focus containment, Escape behavior, and screen-reader labels.
-- [ ] **Day 9 — Image resilience (2h):** add missing-image, loading, and reduced-motion states using local assets only.
-- [ ] **Day 10 — Responsive art direction (3h):** improve image crops, captions, spacing, and breakpoints for small screens.
+All items below are future estimates, not completed sessions. Schedule program sessions only after explicit project approval.
 
-## Days 11–15 — Editorial depth and quality
+| Status | Work | Hours | Completion evidence |
+| --- | --- | ---: | --- |
+| Planned | Versioned project JSON save/load with strict validation and size limits | 4 | Round-trip designs; reject malformed files with clear errors |
+| Planned | Snapping, alignment guides, and centre/distribute tools | 4 | Consistent placement across resized previews and both sides |
+| Planned | Accurate text bounds and printable-area overflow warnings | 3 | Rotated text and shapes report clipping correctly |
+| Planned | Grouped editing transactions and keyboard shortcuts | 3 | One slider gesture equals one undo; shortcuts respect text fields |
+| Planned | PNG export with resolution options | 3 | Correct dimensions and artwork on front/back exports |
+| Planned | Sleeve views and reusable original graphic presets | 4 | Independent sleeve artwork and documented original assets |
+| Planned | Browser interaction and accessibility tests | 4 | Drag, touch, keyboard, undo, and export scenarios exercised |
+| Planned | Performance, documentation, and release checks | 3 | Layer-limit stress test, setup verification, and scope review |
 
-- [ ] **Day 11 — Field notes expansion (2h):** add more static editorial notes and a clear content-provenance convention.
-- [ ] **Day 12 — Component structure (3h):** split catalogue cards, controls, modal details, and notes into maintainable components.
-- [ ] **Day 13 — Accessibility review (3h):** run a manual contrast, semantics, reduced-motion, and keyboard review.
-- [ ] **Day 14 — Frontend tests (4h):** test filtering, sorting, URL state, empty results, and modal close behavior.
-- [ ] **Day 15 — API tests (3h):** test health, list, detail, query, 404, and method-rejection responses.
+Total remaining planned work: **28 hours**. Estimates cover work genuinely intended for the design tool; they are not a guarantee of program selection.
 
-## Days 16–20 — Release readiness
+## Scope
 
-- [ ] **Day 16 — Performance pass (3h):** review image sizes, lazy loading, bundle output, and perceived loading behavior.
-- [ ] **Day 17 — Continuous integration (3h):** add install, lint, build, mock API syntax, and secret-scan checks.
-- [ ] **Day 18 — Asset and license review (2h):** document local image provenance and confirm fictional content boundaries.
-- [ ] **Day 19 — Documentation release pass (2h):** update setup instructions, API examples, scope notes, and a changelog entry.
-- [ ] **Day 20 — Submission rehearsal (3h):** run the complete build, security, history, privacy, and public-repository checklist.
+Garment Studio edits original vector garment concepts locally. It has no customer accounts, checkout, contact collection, remote artwork uploads, analytics, or server-side design storage. Text is rendered as text, not executed as markup. Avoid entering personal information. Any future file import must be reviewed for its data scope.
 
-Total planned work: **56 hours across 20 development days**.
-
-The non-transactional scope remains fixed: no accounts, personal-data collection, payments, messaging, uploads, analytics, or server-side persistence.
+The existing lookbook and optional fictional catalogue API remain available. Photographs in the legacy catalogue still require the asset review in ASSET_REVIEW.md. Credential rotation, historical review, and program approval remain outstanding as recorded in SUBMISSION_CHECKLIST.md.

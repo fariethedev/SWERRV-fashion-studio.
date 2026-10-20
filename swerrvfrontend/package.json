@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --configLoader runner",
-    "lint": "eslint src/App.jsx src/main.jsx",
+    "lint": "eslint src/App.jsx src/main.jsx src/GarmentStudio.jsx src/studio-state.js",
+    "test:studio": "node --test tests/studio-state.test.js",
     "preview": "vite preview"
   },
   "dependencies": {
