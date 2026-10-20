@@ -18,6 +18,12 @@ const SORT_OPTIONS = [
   { value: 'newest', label: 'Newest first' },
   { value: 'alphabetical', label: 'A–Z' },
 ];
+const VIEW_MODES = ['grid', 'list'];
+const FIELD_NOTES = [
+  { index: '01', title: 'Silhouette before product', text: 'The catalogue treats clothing as a moving shape. Entries are framed as studies rather than items for sale.' },
+  { index: '02', title: 'Place changes the garment', text: 'Concrete, night, and open space act as quiet collaborators in the visual language of each look.' },
+  { index: '03', title: 'A slower interface', text: 'The archive uses deliberate pacing, temporary UI state, and no account or transaction layer.' },
+];
 
 function Shell({ children }) {
   const location = useLocation();
@@ -32,6 +38,7 @@ function Shell({ children }) {
           <Link className={location.pathname === '/' ? 'active' : ''} to="/" onClick={() => setMenuOpen(false)}>Index</Link>
           <Link className={location.pathname === '/lookbook' ? 'active' : ''} to="/lookbook" onClick={() => setMenuOpen(false)}>Lookbook</Link>
           <Link className={location.pathname === '/about' ? 'active' : ''} to="/about" onClick={() => setMenuOpen(false)}>About</Link>
+          <Link className={location.pathname === '/notes' ? 'active' : ''} to="/notes" onClick={() => setMenuOpen(false)}>Notes</Link>
         </nav>
         <span className="header-note">Independent fashion study / 2026</span>
       </header>
@@ -53,8 +60,10 @@ function Lookbook() {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialCategory = CATEGORIES.includes(searchParams.get('category')) ? searchParams.get('category') : 'All';
   const initialSort = SORT_OPTIONS.some((option) => option.value === searchParams.get('sort')) ? searchParams.get('sort') : 'featured';
+  const initialView = VIEW_MODES.includes(searchParams.get('view')) ? searchParams.get('view') : 'grid';
   const [category, setCategory] = useState(initialCategory);
   const [sort, setSort] = useState(initialSort);
+  const [view, setView] = useState(initialView);
   const [query, setQuery] = useState(searchParams.get('q') || '');
   const [looks, setLooks] = useState(LOOKS);
   const [apiState, setApiState] = useState(MOCK_API_URL ? 'loading' : 'local');
@@ -100,9 +109,10 @@ function Lookbook() {
     const nextParams = {};
     if (category !== 'All') nextParams.category = category;
     if (sort !== 'featured') nextParams.sort = sort;
+    if (view !== 'grid') nextParams.view = view;
     if (query.trim()) nextParams.q = query.trim();
     setSearchParams(nextParams, { replace: true });
-  }, [category, query, setSearchParams, sort]);
+  }, [category, query, setSearchParams, sort, view]);
 
   useEffect(() => {
     if (!selected) return undefined;
@@ -121,28 +131,34 @@ function Lookbook() {
   const clearFilters = () => {
     setCategory('All');
     setSort('featured');
+    setView('grid');
     setQuery('');
   };
 
   return <section className="lookbook-page page-wrap">
-    <div className="page-intro"><p className="eyebrow">A fictional sample catalogue</p><h1>Lookbook<span>.</span></h1><p>Browse a set of made-up editorial studies. This catalogue is intentionally read-only: it has no user accounts, checkout, messaging, forms, or external data services.</p></div>
+    <div className="page-intro"><p className="eyebrow">A fictional sample catalogue</p><h1>Lookbook<span>.</span></h1><p>Browse a set of made-up editorial studies. This catalogue is intentionally read-only: it has no user accounts, checkout, messaging, forms, or external data services. The optional mock API serves the same fictional records locally.</p></div>
     <div className="catalogue-controls">
       <div className="filter-row" aria-label="Lookbook category filters">{CATEGORIES.map((item) => <button key={item} type="button" className={category === item ? 'selected' : ''} onClick={() => setCategory(item)}>{item}</button>)}</div>
       <div className="control-fields">
         <label className="search-field"><span>Search the archive</span><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try texture or night" /></label>
         <label className="sort-field"><span>Arrange by</span><select value={sort} onChange={(event) => setSort(event.target.value)}>{SORT_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label>
+        <div className="view-toggle" role="group" aria-label="Catalogue presentation"><span>View</span>{VIEW_MODES.map((mode) => <button key={mode} type="button" className={view === mode ? 'selected' : ''} onClick={() => setView(mode)}>{mode}</button>)}</div>
       </div>
     </div>
-    <div className="catalogue-status"><span>{visibleLooks.length} of {looks.length} studies shown · {apiState === 'connected' ? 'Mock API' : apiState === 'fallback' ? 'Static fallback' : 'Local catalogue'}</span>{(category !== 'All' || sort !== 'featured' || query) && <button type="button" onClick={clearFilters}>Clear view ×</button>}</div>
-    {visibleLooks.length ? <div className="look-grid">{visibleLooks.map((look) => <button className="look-card" type="button" key={look.id} onClick={() => setSelected(look)}><span className="look-image"><img src={look.image} alt="" /></span><span className="look-card-info"><span><strong>{look.title}</strong><small>{look.mood} / {look.year}</small></span><span>{look.category}</span></span></button>)}</div> : <div className="empty-state"><p className="eyebrow">No matching study</p><p>Try another word or return to the full archive.</p><button type="button" onClick={clearFilters}>Reset filters</button></div>}
+    <div className="catalogue-status"><span>{visibleLooks.length} of {looks.length} studies shown · {apiState === 'connected' ? 'Mock API' : apiState === 'fallback' ? 'Static fallback' : 'Local catalogue'}</span>{(category !== 'All' || sort !== 'featured' || view !== 'grid' || query) && <button type="button" onClick={clearFilters}>Clear view ×</button>}</div>
+    {visibleLooks.length ? <div className={`look-grid ${view === 'list' ? 'is-list' : ''}`}>{visibleLooks.map((look) => <button className="look-card" type="button" key={look.id} onClick={() => setSelected(look)}><span className="look-image"><img src={look.image} alt="" /></span><span className="look-card-info"><span><strong>{look.title}</strong><small>{look.mood} / {look.year}</small></span><span>{look.category}</span></span></button>)}</div> : <div className="empty-state"><p className="eyebrow">No matching study</p><p>Try another word or return to the full archive.</p><button type="button" onClick={clearFilters}>Reset filters</button></div>}
     {selected && <div className="look-modal-backdrop" role="presentation" onClick={() => setSelected(null)}><div className="look-modal" role="dialog" aria-modal="true" aria-labelledby="look-title" onClick={(event) => event.stopPropagation()}><button className="modal-close" type="button" aria-label="Close preview" onClick={() => setSelected(null)}>×</button><img src={selected.image} alt={`${selected.title} editorial study`} /><div className="look-details"><p className="eyebrow">{selected.category} / {selected.year}</p><h2 id="look-title">{selected.title}</h2><p>{selected.description}</p><dl className="detail-grid"><div><dt>Format</dt><dd>{selected.medium}</dd></div><div><dt>Atmosphere</dt><dd>{selected.mood}</dd></div></dl><div className="tag-list" aria-label="Study tags">{selected.tags.map((tag) => <span key={tag}>#{tag}</span>)}</div><div className="palette" aria-label="Study colour palette">{selected.palette.map((colour) => <span key={colour} style={{ backgroundColor: colour }} title={colour} />)}</div></div></div></div>}
   </section>;
 }
 
 function About() {
-  return <section className="about-page page-wrap"><div className="page-intro"><p className="eyebrow">About the project</p><h1>Human scale<span>.</span></h1></div><div className="about-grid"><p className="about-lead">SWERRV began as a clothing-commerce build and has been deliberately re-scoped into a static visual catalogue for this public review version.</p><div className="about-body"><p>The current app is a frontend-only study: visitors can browse fictional catalogue entries, filter the lookbook, and preview images in memory. Nothing is submitted, persisted, authenticated, purchased, or sent to a third party.</p><p>The project is designed to be easy to inspect and run locally. Its earlier commerce experiments remain visible in Git history as development context; the active branch intentionally removes those workflows from the running experience.</p></div></div><div className="scope-panel"><span>Current scope</span><strong>Read-only visual catalogue</strong><span>No personal data · no payments · no persistence</span></div></section>;
+  return <section className="about-page page-wrap"><div className="page-intro"><p className="eyebrow">About the project</p><h1>Human scale<span>.</span></h1></div><div className="about-grid"><p className="about-lead">SWERRV began as a clothing-commerce build and has been deliberately re-scoped into a read-only visual catalogue for this public review version.</p><div className="about-body"><p>Visitors can browse fictional catalogue entries, filter and sort the lookbook, switch presentation modes, and preview images in memory. The optional local mock API serves the same records through GET requests only; nothing is submitted, persisted, authenticated, purchased, or sent to a third party.</p><p>The project is designed to be easy to inspect and run locally. Its earlier commerce experiments remain visible in Git history as development context; the active branch intentionally removes those workflows from the running experience.</p></div></div><div className="scope-panel"><span>Current scope</span><strong>Read-only catalogue + mock API</strong><span>No personal data · no payments · no persistence</span></div></section>;
+}
+
+function FieldNotes() {
+  return <section className="notes-page page-wrap"><div className="page-intro"><p className="eyebrow">Working principles</p><h1>Field notes<span>.</span></h1><p>A small set of fictional editorial notes behind the active catalogue. These are static project reflections, not user submissions.</p></div><div className="notes-grid">{FIELD_NOTES.map((note) => <article className="note-card" key={note.index}><span className="note-index">{note.index}</span><h2>{note.title}</h2><p>{note.text}</p></article>)}</div><div className="scope-panel"><span>Interface rule</span><strong>Look, read, move on.</strong><span>No accounts · no checkout · no personal data</span></div></section>;
 }
 
 function NotFound() { return <section className="not-found page-wrap"><p className="eyebrow">404</p><h1>Nothing here<span>.</span></h1><Link className="text-link" to="/">Return to index <span>↗</span></Link></section>; }
 
-export default function App() { return <BrowserRouter><Shell><Routes><Route path="/" element={<Index />} /><Route path="/lookbook" element={<Lookbook />} /><Route path="/about" element={<About />} /><Route path="*" element={<NotFound />} /></Routes></Shell></BrowserRouter>; }
+export default function App() { return <BrowserRouter><Shell><Routes><Route path="/" element={<Index />} /><Route path="/lookbook" element={<Lookbook />} /><Route path="/about" element={<About />} /><Route path="/notes" element={<FieldNotes />} /><Route path="*" element={<NotFound />} /></Routes></Shell></BrowserRouter>; }
