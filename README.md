@@ -47,6 +47,10 @@ The build and lint commands cover the active catalogue entry points.
 
 ## Data and privacy
 
-All catalogue descriptions are fictional sample content. The app has no forms or write operations and stores only temporary UI state in the browser while a visitor is viewing a lookbook preview. Do not add real customer, subscriber, buyer, or user data to this repository.
+All catalogue descriptions are fictional sample content. The application has no account, contact-submission, or write API workflows. Search and view settings appear in the URL and may remain in browser history or hosting request logs; avoid entering personal information. The optional mock API serves catalogue records and does not implement request logging or a database. Hosting infrastructure must be reviewed separately.
+
+Fonts use local fallbacks without Google Fonts requests. Image rights, identifiable people, and image metadata remain subject to the review described in [ASSET_REVIEW.md](ASSET_REVIEW.md). Fictional descriptions do not establish that photographs are fictional.
+
+The current implementation is a catalogue with a read-only mock API. This documentation does not certify future intended use or program eligibility. If commerce or customer-data functionality remains part of the intended project, disclose that to reviewers; a mock or review-only version does not resolve the program restriction.
 
 See [SCOPE.md](SCOPE.md) for the explicit boundary of the active project, [ROADMAP.md](ROADMAP.md) for the planned development work, and [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md) for the repository-readiness checklist.

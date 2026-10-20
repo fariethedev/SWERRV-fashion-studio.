@@ -9,9 +9,10 @@ This checklist records the repository requirements that can be verified before s
 - [x] **Root README:** the README explains the purpose, audience, technology, local setup, data boundary, and the fact that this is the read-only rescope of the earlier production implementation.
 - [x] **Root license:** the repository contains an MIT license in `LICENSE`.
 - [x] **Real history:** the existing development sequence and commit messages were retained. History was rewritten only to remove exposed credentials; commits were not squashed or replaced with a new project history.
-- [x] **No active secrets:** the active tree contains no credentials or environment files. The rewritten history was scanned and the resulting force push was accepted by GitHub push protection.
-- [x] **No real personal or customer data:** the active catalogue uses fictional sample descriptions and static assets only. It has no accounts, forms, messaging, checkout, uploads, or persistent visitor data.
-- [x] **Non-personal-data scope:** the active application is a read-only visual catalogue and does not process other people's personal data.
+- [ ] **Secrets and credential rotation:** known credentials were redacted from history. Confirm revocation/rotation of Stripe, Google OAuth, database, JWT, and Resend credentials, and complete a scan of all submitted refs. GitHub push protection is not a complete audit.
+- [ ] **Personal data and asset permissions:** descriptions are fictional, but photographs, metadata, and historical files still require review. Record publication rights and any identifiable people in `ASSET_REVIEW.md`.
+- [ ] **Intended scope and deployment:** confirm that the intended project remains a catalogue, review hosting logs and external requests, and obtain the program's scope decision. Mock data alone does not establish eligibility.
+- [ ] **Commit attribution:** confirm the commit email is linked to the owner's GitHub account.
 - [x] **Planned work:** `ROADMAP.md` documents 56 hours across 20 future development days, with every item limited to the read-only catalogue and fictional-data mock API scope.
 - [x] **Verification:** the active frontend passes `npm run build` and `npm run lint`.
 
