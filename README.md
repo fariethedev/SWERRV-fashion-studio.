@@ -1,5 +1,9 @@
 # SWERRV Garment Studio
 
+SWERRV is a garment editor for independent clothing-brand owners who want to turn design ideas into clear specifications for their manufacturers. The next development phase is a tech-pack builder: owners will combine garment views, measurements, materials, colour references, artwork placement, and construction notes into a downloadable document they can send to a manufacturer themselves.
+
+**Tech-pack creation and PDF export are planned, not implemented yet.** The current application supports the visual design workflow described below.
+
 SWERRV includes a local garment design workspace at `/` and `/studio`. Choose a T-shirt, hoodie, or sweatshirt; change fabric colour; switch front/back; add text and built-in vector graphics; drag, resize, rotate, reorder, and delete layers; undo/redo; and export an SVG mockup. Templates and graphic primitives are authored in source code, with no image dependencies for the studio.
 
 Designs remain in memory and are lost on refresh. Export each side separately to retain a visual mockup. Artwork outside the dashed print area is clipped. Exports are illustrations, not dimensioned production print files. This version has no 3D rendering or uploaded-image editor.
@@ -8,13 +12,25 @@ Run `npm run test:studio` inside `swerrvfrontend` for history and state tests. T
 
 ## Existing catalogue
 
-SWERRV is a read-only fashion lookbook and visual catalogue. It presents fictional editorial studies focused on silhouette, texture, colour, and composition. Visitors can browse the index, search and filter the lookbook, sort the archive, and open an in-memory image preview with study metadata.
+SWERRV also includes a read-only fashion lookbook and visual catalogue. It presents fictional editorial studies focused on silhouette, texture, colour, and composition. Visitors can browse the index, search and filter the lookbook, sort the archive, and open an in-memory image preview with study metadata.
 
-This repository is personally owned and is the rescope of an earlier SWERRV clothing-commerce implementation. The active version is intentionally a read-only catalogue: it does not create accounts, collect contact details, accept payments, submit forms, send messages, use cookies for profiles, or persist visitor data. An optional local mock API serves fictional catalogue records over GET requests only. The earlier implementation remains visible in Git history as development context; it is not part of the active running scope.
+This repository is personally owned and is the rescope of an earlier SWERRV clothing-commerce implementation. The active application combines a local garment editor with a read-only catalogue. It has no customer accounts, contact collection, checkout, or messaging. An optional local mock API serves fictional catalogue records over GET requests only. The earlier implementation remains visible in Git history as development context; it is not part of the active running scope.
 
 ## Who it serves
 
-The project is for anyone exploring a small editorial fashion archive on the web: viewers, designers, and developers interested in a focused React interface with no account or transaction workflow.
+The primary audience is independent clothing-brand owners and garment designers preparing designs for manufacturing. The planned workflow is to edit a garment, specify how it should be made, check the specification, and download a tech pack for sharing outside the app.
+
+## Planned work — 28 hours
+
+- [ ] Local design and specification save/load with validation — **4h**.
+- [ ] Size charts, garment measurements, units, and tolerances — **5h**.
+- [ ] Fabric composition, weight, trims, colours, and construction notes — **4h**.
+- [ ] Front/back technical views with artwork dimensions and placement annotations — **4h**.
+- [ ] Multi-page tech-pack preview and PDF export — **5h**.
+- [ ] Completeness checks and document revision tracking — **3h**.
+- [ ] Workflow tests, export checks, and setup documentation — **3h**.
+
+These are future tasks, separate from the existing editor. See [ROADMAP.md](ROADMAP.md) for completion criteria. Tech packs will use garment specifications, not customer records, body measurements linked to people, or manufacturer contact details. Sending the downloaded file is outside the app; no email integration is planned. Specifications will require review with the manufacturer before production.
 
 ## Technology
 
@@ -53,7 +69,7 @@ During development, the lookbook requests `/api/looks` through Vite, which forwa
 
 For production hosting, route `/api` to the Node service or set `VITE_MOCK_API_URL` before building. Vite's development proxy is not included in a static deployment.
 
-The build and lint commands cover the active catalogue entry points.
+The build and lint commands cover the garment studio and catalogue.
 
 ## Data and privacy
 
@@ -61,6 +77,6 @@ All catalogue descriptions are fictional sample content. The application has no 
 
 Fonts use local fallbacks without Google Fonts requests. Image rights, identifiable people, and image metadata remain subject to the review described in [ASSET_REVIEW.md](ASSET_REVIEW.md). Fictional descriptions do not establish that photographs are fictional.
 
-The current implementation is a catalogue with a read-only mock API. This documentation does not certify future intended use or program eligibility. If commerce or customer-data functionality remains part of the intended project, disclose that to reviewers; a mock or review-only version does not resolve the program restriction.
+The current implementation is a local garment editor and catalogue with a read-only mock API; tech-pack creation is the planned next phase. This documentation does not certify program eligibility. Disclose this intended scope to reviewers.
 
 See [SCOPE.md](SCOPE.md) for the explicit boundary of the active project, [ROADMAP.md](ROADMAP.md) for the planned development work, and [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md) for the repository-readiness checklist.
